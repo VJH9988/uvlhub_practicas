@@ -11,6 +11,9 @@ on:
 jobs:
   codacy:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ['3.13','3.14']
     services:
       mariadb:
         image: mariadb:12.0.2
@@ -62,3 +65,11 @@ jobs:
     - name: Verify new version of dependencies
       run: |
           python -m pip list --outdated
+
+    - name: analisis de seguridad de dependencias
+      run: |
+        python -m pip install pip-audit
+
+    - name: Audit dependencies
+      run: |
+        pip-audit
