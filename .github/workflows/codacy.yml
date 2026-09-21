@@ -58,3 +58,7 @@ jobs:
       run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r coverage.xml
       env:
         CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
+    - name: Verify new version of dependencies
+      run: |
+          python -m pip list --outdated
